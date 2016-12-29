@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyGalacticon</string>
+    <string name="action_settings">settings</string>
+    <string name="api_key">fc6AENf7LTCFV04s6RUvJ9ZHeZd4paM1sZuo1jhU</string>
 </resources>

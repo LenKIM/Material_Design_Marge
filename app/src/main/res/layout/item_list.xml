@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="@dimen/md_keylines">
+
+    <ImageView
+            android:id="@+id/list_avator"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/a_avator"/>
+
+    <TextView
+            android:id="@+id/list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/list_avator"
+            tools:text="PPPP"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="16sp"/>
+
+    <TextView
+            android:id="@+id/list_decs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_title"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_toRightOf="@id/list_avator"
+            android:textColor="@color/medium_grey"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="GGGGGGFHFJDHFJDSGFKDHFKJDSHF"
+            android:textSize="14sp"
+            />
+
+</RelativeLayout>
