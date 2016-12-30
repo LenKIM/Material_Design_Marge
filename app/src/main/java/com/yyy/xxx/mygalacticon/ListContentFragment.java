@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,14 +48,13 @@ public class ListContentFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
 
 
-
-
         adapter = new ContentAdapter(getContext(), photoArrayList);
 
         mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setAdapter(adapter);
-        //recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
+        //진우형이 캐스트를 하지않고 인터페이스를 객체생성하여서 넘겨주었음
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -62,7 +62,14 @@ public class ListContentFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-                if (!mPhotoRequester.isLoadingData() && totalItemCount == getLastVisibleItemPosition() + 1);
+                if (!mPhotoRequester.isLoadingData() && totalItemCount == getLastVisibleItemPosition() + 1)
+                {
+                    try {
+                        mPhotoRequester.getPhoto(getActivity());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
         return rootView;
@@ -74,35 +81,25 @@ public class ListContentFragment extends Fragment {
 
         mPhotoRequester = new PhotoRequester(getActivity(), photoRequesterResponse);
 
-        try {
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-            mPhotoRequester.getPhoto(getContext());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
+        Log.d(TAG, String.valueOf(photoArrayList.size()));
+
+            try {
+                // 초기화면에 가득차게 만들고싶음.
+                    mPhotoRequester.getPhoto(getActivity());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+/**
+ *  진우님이 코딩한 부분
+ * */
     private PhotoRequester.PhotoRequesterResponse  photoRequesterResponse = new PhotoRequester.PhotoRequesterResponse() {
         @Override
         public void receivedNewPhoto(Photo newPhoto) {
             if (adapter != null){
+
                 photoArrayList.add(newPhoto);
                 adapter.notifyDataSetChanged();
             }

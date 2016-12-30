@@ -1,7 +1,6 @@
 package com.yyy.xxx.mygalacticon;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -56,6 +55,8 @@ public class PhotoRequester  {
     public void getPhoto(Context context) throws IOException{
 
         RequestQueue requestQueue = MyVolley.getInstence(context).getRequestQueue();
+
+
         String date = mDateFormat.format(mCalendar.getTime());
 
         String urlRequest = BASE_URL + DATE_PARAMETER + date + API_KEY_PARAMETER +
@@ -86,18 +87,21 @@ public class PhotoRequester  {
 
             @Override
             public void onResponse(JSONObject jsonObject) {
-                String from_server = null;
 
                 try {
 
-                    mCalendar.add(Calendar.DAY_OF_YEAR, -1);
+
+                    mCalendar.add(Calendar.DATE, -1);
 
                     if (!jsonObject.getString(MEDIA_TYPE_KEY).equals(MEDIA_TYPE_VIDEO_VALUE)) {
+
                         Photo receivePhoto = new Photo(jsonObject);
+
                         mResponseListener.receivedNewPhoto(receivePhoto);
 
                         mLoadingData = false;
-                    } else {
+                    }
+                      else {
                         getPhoto(context);
                     }
 

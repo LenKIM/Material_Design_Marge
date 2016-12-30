@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        //adapter.addFragment(new CardFragment(), "Card");
+        adapter.addFragment(new CardFragment(), "Card");
         adapter.addFragment(new ListContentFragment(), "List");
-        //adapter.addFragment(new TilFragment(), "Tile");
+        adapter.addFragment(new TilFragment(), "Tile");
         viewPager.setAdapter(adapter);
 
     }
