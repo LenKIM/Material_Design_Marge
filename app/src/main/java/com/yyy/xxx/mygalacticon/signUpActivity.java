@@ -1,7 +1,6 @@
 package com.yyy.xxx.mygalacticon;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -87,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
         sinUpButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this,
-                R.style.AppTheme);
+                android.R.style.Theme_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -97,9 +96,6 @@ public class SignUpActivity extends AppCompatActivity {
         final String password = input_signUpPassowrd.getText().toString();
 
         //받은 인텐트의 값에 따라서 다르게 동작하게 만들기.
-        Intent intent = getIntent();
-
-//        int kind = intent.getIntExtra("KIND",NOT_FOUND);
 
         int kind = UserInfo.getInstance().getKIND();
 

@@ -1,6 +1,7 @@
 package com.yyy.xxx.mygalacticon;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -10,6 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class LoginClassSQLlite extends SQLiteOpenHelper {
 
+
+    SQLiteDatabase db;
 
     public LoginClassSQLlite(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -41,6 +44,7 @@ public class LoginClassSQLlite extends SQLiteOpenHelper {
         //입력한 항목과 일치하는 행의 가격정보 수정
         db.execSQL("UPDATE USER SET price=" + password + " WHERE item='" + name + "';");
         db.close();
+
     }
 
     public void delete(String name) {
@@ -48,6 +52,15 @@ public class LoginClassSQLlite extends SQLiteOpenHelper {
         // 입력한 항목과 일치하는 행 삭제
         db.execSQL("DELETE FROM USER WHERE name='" + name + "';");
         db.close();
+    }
+
+    public String searchPassword(String email) {
+        String SearchedPassword = null;
+
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name, password")
+
+        return SearchedPassword;
     }
 
 //    public String getResult(){
